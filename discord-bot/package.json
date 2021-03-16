@@ -1,0 +1,14 @@
+{
+  "name": "wall-titi",
+  "version": "1.0.0",
+  "description": "my First discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "titi",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
