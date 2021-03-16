@@ -26,5 +26,8 @@
     "inversify": "^5.0.5",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
   }
 }
