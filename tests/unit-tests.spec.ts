@@ -24,13 +24,7 @@ describe('MessageResponder', () => {
 
   it('should reply', async () => {
     whenIsPingThenReturn(true);
-<<<<<<< HEAD
     await service.handle(mockedMessageInstance);
-=======
-
-    await service.handle(mockedMessageInstance);
-
->>>>>>> dev
     verify(mockedMessageClass.reply('hello user')).once();
   })
 
