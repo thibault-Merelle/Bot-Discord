@@ -1,0 +1,47 @@
+- name: set up azure-vm
+  hosts: azure-vm
+  become: yes
+  become_method: sudo
+  remote_user: "{{ AZ_user }}"
+
+  vars_prompt:
+
+    - name: mytoken
+      prompt: what is your discord token ?
+      default: "56184168681618131"
+      private: no
+
+
+
+  tasks:
+
+  - name: Install Packages
+    apt: name={{ item }} update_cache=yes state=latest
+    with_items:
+      - build-essential
+      - npm
+      - nodejs
+      - git
+      - mcrypt
+      - nginx
+      - curl
+
+
+  - name: clone git repository
+    git:
+      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+      dest: /home/{{ AZ_user }}/{{ app_name }}
+      update: yes
+
+
+  - name: Create file .env
+    copy:
+      dest: /home/{{ AZ_user }}/{{ app_name }}/.env
+      content: |
+        TOKEN="{{mytoken}}"
+
+  - name: execute npm watch
+    command: npm run watch
+
+  - name: execute npm start
+    command: npm run start
