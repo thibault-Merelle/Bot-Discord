@@ -1,0 +1,94 @@
+- name: set up azure-vm
+
+  vars_prompt:
+
+    - name: vm_ip
+      prompt: what is your vm ip address ?
+      default: "52.151.26.21"
+      private: no
+
+    - name: mygithub_user
+      prompt: what is your git hub user name ?
+      default: "thibault-Merelle"
+      private: no
+
+    - name: myaz_user
+      prompt: what is your vm user name ?
+      default: "Marvin"
+      private: no
+
+    - name: myapp_name
+      prompt: what is your application name ?
+      default: "Bot-Discord"
+      private: no
+
+
+  tasks:
+  - name: Create file hosts
+    copy:
+      dest: ./hosts
+      content: |
+        [azure-vm]
+        "{{vm_ip}}""
+        TOKEN="{{mytoken}}"
+        " "
+        [azure-vm:vars]
+        github_user="{{mygithub_user}}"
+        AZ_user="{{myaz_user}}"
+        app_name="{{myapp_name}}"
+
+
+
+  hosts: azure-vm
+  become: yes
+  become_method: sudo
+  remote_user: "{{ AZ_user }}"
+
+  vars_prompt:
+    - name: mytoken
+      prompt: what is your discord token ?
+      default: "56184168681618131"
+      private: no
+
+
+
+  tasks:
+
+
+  - name: clone git repository
+    git:
+      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+      dest: /home/{{ AZ_user }}/{{ app_name }}
+      update: yes
+
+
+  # - name: Ensure bash, OpenSSl, and libssl are the latest versions
+  #   apt: name={{ item }} update_cache=true state=latest
+  #   with_items:
+  #     - bash
+  #     - openssl
+  #     - libssl-dev
+  #     - libssl-doc
+  #   tags: packages
+
+  # - name: ensure apt cache is up to date
+  #   apt: update_cache=yes
+
+  # - name: ensure packages are installed
+  #   apt: name={{ item }} state=latest
+  #   with_items:
+  #       - postgresql
+  #       - libpq-dev
+  #       - python3-flask
+  #       - python3-dotenv
+  #       - python3-psycopg2
+
+  - name: Create file .env
+    copy:
+      dest: /home/{{ AZ_user }}/{{ app_name }}/.env
+      content: |
+        TOKEN="{{mytoken}}"
+
+  # - name: execute app.py
+  #   command: python3 /home/{{ AZ_user }}/{{ app_name }}/app.py
+
