@@ -15,9 +15,10 @@ export class MessageResponder {
 
   handle(message: Message): Promise<Message | Message[]> {
     if (this.pingFinder.isPing(message.content)) {
-      return message.reply('hello '+ message.author.username);
+      return message.reply('hello user');
     } else if (this.pingFinder.isTestWord(message.content)) {
-        return message.reply('bye!');
+        // return message.reply('hello '+ message.author.username);
+        return message.reply('bye');
     }
 
     return Promise.reject();

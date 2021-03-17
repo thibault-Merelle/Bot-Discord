@@ -3,8 +3,8 @@ import {injectable} from "inversify";
 @injectable()
 export class PingFinder {
 
-    private regexp = 'hello robot';
-    private test_word = 'hello';
+    private regexp = 'hello le robot';
+    private test_word = 'bonjour';
 
     public isPing(stringToSearch: string): boolean {
         return stringToSearch.search(this.regexp) >= 0;
