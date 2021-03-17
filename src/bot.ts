@@ -2,7 +2,7 @@ import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "./types";
 import {MessageResponder} from "./services/message-responder";
-import { logger } from "./index";
+import { logger } from "./setup.logger";
 
 @injectable()
 export class Bot {
