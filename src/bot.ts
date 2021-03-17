@@ -2,6 +2,7 @@ import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "./types";
 import {MessageResponder} from "./services/message-responder";
+import { logger } from "./index";
 
 @injectable()
 export class Bot {
@@ -21,16 +22,16 @@ export class Bot {
   public listen(): Promise<string> {
     this.client.on('message', (message: Message) => {
       if (message.author.bot) {
-        console.log('Ignoring bot message!')
+        logger.warn('Ignoring bot message!')
         return;
       }
 
-      console.log("Message received! Contents: ", message.content);
+      logger.info("Message received! Contents: ", message.content);
 
       this.messageResponder.handle(message).then(() => {
-        console.log("Response sent!");
+        logger.info("Response sent!");
       }).catch(() => {
-        console.log("Response not sent.")
+        logger.error("Response not sent.")
       })
     });
 
