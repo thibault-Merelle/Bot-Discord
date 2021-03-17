@@ -1,0 +1,9 @@
+name: Workflow bot discord
+on:
+  - push
+jobs:
+  premierJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test hello World
+        run: echo "hello world"
