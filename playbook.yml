@@ -60,7 +60,6 @@
       npm: path=/home/{{ AZ_user }}/{{ app_name }}
       when: git_finished.changed
 
-
     - name: execute npm watch
       become_method: sudo
       command: npm run watch
