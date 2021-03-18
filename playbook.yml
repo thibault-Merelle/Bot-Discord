@@ -66,9 +66,12 @@
       command: npm run watch
       args:
         chdir: /home/{{ AZ_user }}/{{ app_name }}
+      register: watch_finished
+      when: npm_install_package.changed
 
     - name: execute npm start
       become_method: sudo
       command: npm run start
       args:
         chdir: /home/{{ AZ_user }}/{{ app_name }}
+      when: watch_finished.changed
