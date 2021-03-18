@@ -26,6 +26,9 @@
       - nginx
       - curl
 
+  - name: ensure apt cache is up to date
+    apt: update_cache=yes
+    
 
   - name: clone git repository
     git:
@@ -33,6 +36,7 @@
       dest: /home/{{ AZ_user }}/{{ app_name }}
       version: ansible
       update: yes
+
 
 
   - name: Create file .env
