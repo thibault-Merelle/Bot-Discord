@@ -34,9 +34,9 @@
     command: sudo apt-get install -y nodejs
 
   - name: Remove all element
-      ansible.builtin.shell: rm -rf Bot-Discord
-      args:
-        executable: /bin/bash
+    ansible.builtin.shell: rm -rf Bot-Discord/
+    args:
+      executable: /bin/bash
 
   - name: clone git repository
     git:
