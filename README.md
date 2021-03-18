@@ -1,8 +1,9 @@
+![enter image description here](https://logos-download.com/wp-content/uploads/2021/01/Discord_Logo_full.png)
+
 # Projet : Bot-discord
 
 Dans le cadre de la formation MS CLOUD de l'école du numérique simplon.co, notre équipe à réalisé un Bot sur l'application de chat Discord. Ce bot est déployé sur une machine virtuelle de Microsoft Azure.
 
-![enter image description here](https://logos-download.com/wp-content/uploads/2021/01/Discord_Logo_full.png)
 
 ## Equipe de developpement
 Thibault: lien github
