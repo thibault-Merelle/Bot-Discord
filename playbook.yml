@@ -26,10 +26,6 @@
       - nginx
       - curl
 
-  - name: install mocha test env
-    command: npm install
-
-
 
   - name: clone git repository
     git:
@@ -43,6 +39,9 @@
       dest: /home/{{ AZ_user }}/{{ app_name }}/.env
       content: |
         TOKEN="{{mytoken}}"
+
+  - name: install mocha test env
+    command: npm install
 
   - name: execute npm watch
     command: npm run watch
