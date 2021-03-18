@@ -2,7 +2,10 @@ import {Client, Message} from "discord.js";
 import {inject, injectable} from "inversify";
 import {TYPES} from "./types";
 import {MessageResponder} from "./services/message-responder";
+<<<<<<< HEAD
+=======
 import { logger } from "./setup.logger";
+>>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
 
 @injectable()
 export class Bot {
@@ -22,6 +25,18 @@ export class Bot {
   public listen(): Promise<string> {
     this.client.on('message', (message: Message) => {
       if (message.author.bot) {
+<<<<<<< HEAD
+        console.log('Ignoring bot message!')
+        return;
+      }
+
+      console.log("Message received! Contents: ", message.content);
+
+      this.messageResponder.handle(message).then(() => {
+        console.log("Response sent!");
+      }).catch(() => {
+        console.log("Response not sent.")
+=======
         logger.warn('Ignoring bot message!')
         return;
       }
@@ -32,6 +47,7 @@ export class Bot {
         logger.info("Response sent!");
       }).catch(() => {
         logger.error("Response not sent.")
+>>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
       })
     });
 
