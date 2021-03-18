@@ -19,15 +19,18 @@
     apt: name={{ item }} update_cache=yes state=latest
     with_items:
       - build-essential
-      - npm
-      - nodejs
       - git
       - mcrypt
       - nginx
-      - curl
 
   - name: ensure apt cache is up to date
     apt: update_cache=yes
+
+  - name: connect source for node.js
+    command: curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+
+  - name: set up npm and node.js lastest
+    command: sudo apt-get install -y nodejs
 
 
   - name: clone git repository
@@ -52,8 +55,8 @@
   # - name: install mocha test env
   #   command: npm install
 
-  # - name: execute npm watch
-  #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
+  - name: execute npm watch
+    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
 
-  # - name: execute npm start
-  #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
+  - name: execute npm start
+    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
