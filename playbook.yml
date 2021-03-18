@@ -47,15 +47,31 @@
         content: |
           TOKEN="{{mytoken}}"
 
+    # - name: install packages bases on package.json
+    #   community.general.npm:
+    #     path: /home/{{ AZ_user }}/{{ app_name }}
+
+    # - name: update packages
+    #   community.general.npm:
+    #     path: /home/{{ AZ_user }}/{{ app_name }}
+    #     state: latest
+
     - name: install npm package
       npm: path=/home/{{ AZ_user }}/{{ app_name }}
       when: git_finished.changed
 
-    - name: execute npm watch
-      become_method: sudo
-      command: npm run watch
+    - name: exec commande npm
+      become: true
+      become_user: root
+      shell: npm run watch
       args:
         chdir: /home/{{ AZ_user }}/{{ app_name }}
+
+    # - name: execute npm watch
+    #   become_method: sudo
+    #   command: npm run watch
+    #   args:
+    #     chdir: /home/{{ AZ_user }}/{{ app_name }}
 
     - name: execute npm start
       become_method: sudo
