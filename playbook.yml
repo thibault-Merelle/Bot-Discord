@@ -28,10 +28,10 @@
     - name: set up npm and node.js lastest
       command: sudo apt-get install -y nodejs
 
-    - name: remove all element
-      ansible.builtin.shell: rm -rf Bot-Discord
-      args:
-        executable: /bin/bash
+    # - name: remove all element
+    #   ansible.builtin.shell: rm -rf Bot-Discord
+    #   args:
+    #     executable: /bin/bash
 
     - name: clone git repository
       git:
