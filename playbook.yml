@@ -7,7 +7,7 @@
   vars_prompt:
     - name: mytoken
       prompt: what is your discord token ?
-      default: "ODIxMzg2Nzg4NjE4MTA4OTU4.YFC-Dw.lmIxsbFiF5UXS_i13asqRbSlNzg"
+      default: "ODIxNDA0Njg1MjMxNDU2Mjc3.YFDOuQ.NhwFEB8mbFvksrfq0sO7iXnRC-s"
       private: no
 
   tasks:
@@ -28,10 +28,10 @@
     - name: set up npm and node.js lastest
       command: sudo apt-get install -y nodejs
 
-    # - name: remove all element
-    #   ansible.builtin.shell: rm -rf Bot-Discord
-    #   args:
-    #     executable: /bin/bash
+    - name: Remove all element
+      ansible.builtin.shell: rm -rf Bot-Discord
+      args:
+        executable: /bin/bash
 
     - name: clone git repository
       git:
@@ -41,23 +41,15 @@
         update: yes
       register: git_finished
 
-    - name: create file .env
+    - name: Create file .env
       copy:
         dest: /home/{{ AZ_user }}/{{ app_name }}/.env
         content: |
           TOKEN="{{mytoken}}"
 
-    # - name: install packages bases on package.json
-    #   community.general.npm:
-    #     path: /home/{{ AZ_user }}/{{ app_name }}
-
-    # - name: update packages
-    #   community.general.npm:
-    #     path: /home/{{ AZ_user }}/{{ app_name }}
-    #     state: latest
-
     - name: install npm package
       npm: path=/home/{{ AZ_user }}/{{ app_name }}
+      register: npm_install_package
       when: git_finished.changed
 
     - name: execute npm watch
