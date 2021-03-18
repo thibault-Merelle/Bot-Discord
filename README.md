@@ -1,4 +1,4 @@
-![enter image description here](https://logos-download.com/wp-content/uploads/2021/01/Discord_Logo_full.png)
+![discord logo](https://logos-download.com/wp-content/uploads/2021/01/Discord_Logo_full.png)
 
 # Projet : Bot-discord
 
@@ -13,7 +13,7 @@ Mouny: lien github
 
 joshua: lien github
 
-![enter image description here](https://lh3.googleusercontent.com/proxy/Ly_ONLAqJEfFeU_XgPap1zVcLreRi4-6cZhuBY0ueUULUZtkcEcshvsHqbIuCVopDIMGbTrDaQ_6GGx9A5ysSJ-6YY3pAJN0fQSDnUel6VJ3qpmBfuDo9bTZDyE)
+![simplon-logo](https://simplon.co/storage/2693/logo-simplon_23.png)
 
 ## Technologie utilisées
 
