@@ -31,7 +31,7 @@
     git:
       repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
       dest: /home/{{ AZ_user }}/{{ app_name }}
-      version: dev
+      version: ansible
       update: yes
 
 
@@ -41,12 +41,15 @@
       content: |
         TOKEN="{{mytoken}}"
 
+
+  # - name: Go to the folder and execute command
+  #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm install
         
   - name: install mocha test env
     command: npm install
 
   - name: execute npm watch
-    command: npm run watch
+    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
 
   - name: execute npm start
-    command: npm run start
+    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
