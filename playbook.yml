@@ -5,69 +5,60 @@
   remote_user: "{{ AZ_user }}"
 
   vars_prompt:
-
     - name: mytoken
       prompt: what is your discord token ?
-      default: "56184168681618131"
+      default: "ODIxMzg2Nzg4NjE4MTA4OTU4.YFC-Dw.lmIxsbFiF5UXS_i13asqRbSlNzg"
       private: no
 
-
-
   tasks:
+    - name: Install Packages
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - build-essential
+        - git
+        - mcrypt
+        - nginx
 
-  - name: Install Packages
-    apt: name={{ item }} update_cache=yes state=latest
-    with_items:
-      - build-essential
-      - git
-      - mcrypt
-      - nginx
+    - name: ensure apt cache is up to date
+      apt: update_cache=yes
 
-  - name: ensure apt cache is up to date
-    apt: update_cache=yes
+    - name: change npm version
+      shell: "curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -"
 
-  - name: change npm version
-    shell: 'curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -'
+    - name: set up npm and node.js lastest
+      command: sudo apt-get install -y nodejs
 
+    - name: Remove all element
+      ansible.builtin.shell: rm -rf Bot-Discord
+      args:
+        executable: /bin/bash
 
-  - name: set up npm and node.js lastest
-    command: sudo apt-get install -y nodejs
+    - name: clone git repository
+      git:
+        repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+        dest: /home/{{ AZ_user }}/{{ app_name }}
+        version: ansible
+        update: yes
+      register: git_finished
 
+    - name: Create file .env
+      copy:
+        dest: /home/{{ AZ_user }}/{{ app_name }}/.env
+        content: |
+          TOKEN="{{mytoken}}"
 
-  - name: Remove all element
-    ansible.builtin.shell: rm -rf Bot-Discord
-    args:
-      executable: /bin/bash
+    - name: install npm package
+      npm: path=/home/{{ AZ_user }}/{{ app_name }}
+      when: git_finished.changed
 
-  - name: clone git repository
-    git:
-      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
-      dest: /home/{{ AZ_user }}/{{ app_name }}
-      version: ansible
-      update: yes
-
-
-
-  - name: Create file .env
-    copy:
-      dest: /home/{{ AZ_user }}/{{ app_name }}/.env
-      content: |
-        TOKEN="{{mytoken}}"
-
-  - name: install npm env
-    command: npm install
-
-  - name: install mocha test env
-    shell: 'sudo npm install'
-
-
-  - name: execute npm watch
-    shell: 'npm run start'
-    args:
+    - name: execute npm watch
+      become_method: sudo
+      command: npm run watch
+      args:
         chdir: /home/{{ AZ_user }}/{{ app_name }}
-    # become_method: sudo
-    # command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
 
-  - name: execute npm start
-    become_method: sudo
-    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
+    - name: execute npm start
+      become_method: sudo
+      command: npm run start
+      args:
+        chdir: /home/{{ AZ_user }}/{{ app_name }}
