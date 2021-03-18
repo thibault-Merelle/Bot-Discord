@@ -7,6 +7,11 @@ jobs:
     steps:
       - name: Test hello World
         run: echo "hello world"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> dev
   
   TestBot:
     runs-on: ubuntu-latest
@@ -17,3 +22,7 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm test 
+<<<<<<< HEAD
+=======
+>>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
+>>>>>>> dev

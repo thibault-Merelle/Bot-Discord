@@ -26,6 +26,13 @@
       - nginx
       - curl
 
+<<<<<<< HEAD
+=======
+  - name: install mocha test env
+    command: npm install
+
+
+>>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
 
   - name: clone git repository
     git:
@@ -40,6 +47,13 @@
       content: |
         TOKEN="{{mytoken}}"
 
+<<<<<<< HEAD
+=======
+        
+  - name: install mocha test env
+    command: npm install
+
+>>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
   - name: execute npm watch
     command: npm run watch
 

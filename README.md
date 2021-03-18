@@ -4,10 +4,6 @@
 
 Dans le cadre de la formation MS CLOUD de l'école du numérique simplon.co, notre équipe à réalisé un Bot sur l'application de chat Discord. Ce bot est déployé sur une machine virtuelle de Microsoft Azure.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8ffa3fd96bb611570782ffa65b2dfa6467470843
 
 ## Equipe de developpement
 
