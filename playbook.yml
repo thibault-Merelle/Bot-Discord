@@ -55,10 +55,13 @@
 
         
   - name: install mocha test env
-    command: npm install
+    shell: 'sudo npm install'
+
 
   - name: execute npm watch
+    become_method: sudo
     command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
 
   - name: execute npm start
+    become_method: sudo
     command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
