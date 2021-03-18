@@ -44,6 +44,10 @@
       content: |
         TOKEN="{{mytoken}}"
 
+        
+  - name: install mocha test env
+    command: npm install
+
   - name: execute npm watch
     command: npm run watch
 
