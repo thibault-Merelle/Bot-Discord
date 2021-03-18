@@ -60,18 +60,12 @@
       npm: path=/home/{{ AZ_user }}/{{ app_name }}
       when: git_finished.changed
 
-    - name: exec commande npm
-      become: true
-      become_user: root
-      shell: npm run watch
+
+    - name: execute npm watch
+      become_method: sudo
+      command: npm run watch
       args:
         chdir: /home/{{ AZ_user }}/{{ app_name }}
-
-    # - name: execute npm watch
-    #   become_method: sudo
-    #   command: npm run watch
-    #   args:
-    #     chdir: /home/{{ AZ_user }}/{{ app_name }}
 
     - name: execute npm start
       become_method: sudo
