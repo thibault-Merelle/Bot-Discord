@@ -32,6 +32,10 @@
   - name: set up npm and node.js lastest
     command: sudo apt-get install -y nodejs
 
+  - name: install mocha test env
+    command: npm install
+
+
 
   - name: clone git repository
     git:
@@ -48,12 +52,9 @@
       content: |
         TOKEN="{{mytoken}}"
 
-
-  - name: Go to the folder and execute command
-    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm install
         
-  # - name: install mocha test env
-  #   command: npm install
+  - name: install mocha test env
+    command: npm install
 
   - name: execute npm watch
     command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
