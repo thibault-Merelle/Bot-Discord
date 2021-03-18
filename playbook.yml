@@ -45,11 +45,11 @@
   # - name: Go to the folder and execute command
   #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm install
         
-  - name: install mocha test env
-    command: npm install
+  # - name: install mocha test env
+  #   command: npm install
 
-  - name: execute npm watch
-    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
+  # - name: execute npm watch
+  #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run watch
 
-  - name: execute npm start
-    command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
+  # - name: execute npm start
+  #   command: chdir=/home/{{ AZ_user }}/{{ app_name }} npm run start
