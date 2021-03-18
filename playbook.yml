@@ -26,8 +26,11 @@
   - name: ensure apt cache is up to date
     apt: update_cache=yes
 
-  - name: connect source for node.js
-    command: curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+  - name: Remove all elements
+      ansible.builtin.shell: curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+      args:
+         executable: /bin/bash
+
 
   - name: set up npm and node.js lastest
     command: sudo apt-get install -y nodejs
