@@ -26,6 +26,10 @@
       - nginx
       - curl
 
+  - name: install mocha test env
+    command: npm install
+
+
 
   - name: clone git repository
     git:
