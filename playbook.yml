@@ -65,7 +65,7 @@
       become_method: sudo
       command: npm run watch
       args:
-        chdir: /home/{{ AZ_user }}/{{ app_name }}
+        path: /home/{{ AZ_user }}/{{ app_name }}
 
     - name: execute npm start
       become_method: sudo
