@@ -31,6 +31,7 @@
     git:
       repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
       dest: /home/{{ AZ_user }}/{{ app_name }}
+      version: dev
       update: yes
 
 
