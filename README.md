@@ -6,25 +6,38 @@ Dans le cadre de la formation MS CLOUD de l'école du numérique simplon.co, not
 
 ## Equipe de developpement
 Thibault: lien github
+
 Mouny: lien github
+
 joshua: lien github
 
 ## Technologie utilisées
 **TypeScript**
+
 => bot
+
 => tests
+
 => logs
+
 **Ansible** 
+
 => déploiement
 
 ## CI et team management
 
 **https://www.notion.so/** 
+
 => Timeline du projet
+
 **https://github.com/** 
+
 => Versionnement
+
 => Taches
+
 => Intégration continue de tests
+
 
 ## Déploiement du bot
 Etape 1 :
