@@ -29,9 +29,7 @@
       command: sudo apt-get install -y nodejs
 
     - name: Remove all element
-      ansible.builtin.shell: rm -rf Bot-Discord
-      args:
-        executable: /bin/bash
+      command: rm -rf Bot-Discord
 
     - name: clone git repository
       git:
@@ -48,9 +46,17 @@
           TOKEN="{{mytoken}}"
 
     - name: install npm package
-      npm: path=/home/{{ AZ_user }}/{{ app_name }}
+      become_method: sudo
+      command: npm install
+      args:
+        chdir: /home/{{ AZ_user }}/{{ app_name }}
       register: npm_install_package
       when: git_finished.changed
+
+    # - name: install npm package
+    #   npm: path=/home/{{ AZ_user }}/{{ app_name }}
+    #   register: npm_install_package
+    #   when: git_finished.changed
 
     - name: execute npm watch
       become_method: sudo
