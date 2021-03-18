@@ -5,57 +5,69 @@
   remote_user: "{{ AZ_user }}"
 
   vars_prompt:
-
     - name: mytoken
       prompt: what is your discord token ?
-      default: "56184168681618131"
+      default: "ODIxNDA0Njg1MjMxNDU2Mjc3.YFDOuQ.NhwFEB8mbFvksrfq0sO7iXnRC-s"
       private: no
 
-
-
   tasks:
+    - name: Install Packages
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - build-essential
+        - git
+        - mcrypt
+        - nginx
 
-  - name: Install Packages
-    apt: name={{ item }} update_cache=yes state=latest
-    with_items:
-      - build-essential
-      - npm
-      - nodejs
-      - git
-      - mcrypt
-      - nginx
-      - curl
+    - name: ensure apt cache is up to date
+      apt: update_cache=yes
 
-<<<<<<< HEAD
-=======
-  - name: install mocha test env
-    command: npm install
+    - name: change npm version
+      shell: "curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -"
 
+    - name: set up npm and node.js lastest
+      command: sudo apt-get install -y nodejs
 
->>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
+    - name: Remove all element
+      command: rm -rf Bot-Discord
 
-  - name: clone git repository
-    git:
-      repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
-      dest: /home/{{ AZ_user }}/{{ app_name }}
-      update: yes
+    - name: clone git repository
+      git:
+        repo: "https://github.com/{{ github_user }}/{{ app_name }}.git"
+        dest: /home/{{ AZ_user }}/{{ app_name }}
+        update: yes
+      register: git_finished
 
+    - name: Create file .env
+      copy:
+        dest: /home/{{ AZ_user }}/{{ app_name }}/.env
+        content: |
+          TOKEN="{{mytoken}}"
 
-  - name: Create file .env
-    copy:
-      dest: /home/{{ AZ_user }}/{{ app_name }}/.env
-      content: |
-        TOKEN="{{mytoken}}"
+    - name: install npm package
+      become_method: sudo
+      command: npm install
+      args:
+        chdir: /home/{{ AZ_user }}/{{ app_name }}
+      register: npm_install_package
+      when: git_finished.changed
 
-<<<<<<< HEAD
-=======
-        
-  - name: install mocha test env
-    command: npm install
+    # - name: install npm package
+    #   npm: path=/home/{{ AZ_user }}/{{ app_name }}
+    #   register: npm_install_package
+    #   when: git_finished.changed
 
->>>>>>> 670541e1e9095dcfc8c41d2b40233ac1830c88fe
-  - name: execute npm watch
-    command: npm run watch
+    - name: execute npm watch
+      become_method: sudo
+      command: npm run watch
+      args:
+        chdir: /home/{{ AZ_user }}/{{ app_name }}
+      register: watch_finished
+      when: npm_install_package.changed
 
-  - name: execute npm start
-    command: npm run start
+    - name: execute npm start
+      become_method: sudo
+      command: npm run start
+      args:
+        chdir: /home/{{ AZ_user }}/{{ app_name }}
+      when: watch_finished.changed
