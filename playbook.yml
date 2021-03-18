@@ -33,10 +33,10 @@
   - name: set up npm and node.js lastest
     command: sudo apt-get install -y nodejs
 
-  - name: install mocha test env
-    command: npm install
-
-
+  - name: Remove all element
+      ansible.builtin.shell: rm -rf {{ app_name }}
+      args:
+        executable: /bin/bash
 
   - name: clone git repository
     git:
@@ -53,7 +53,9 @@
       content: |
         TOKEN="{{mytoken}}"
 
-        
+  - name: install npm env
+    command: npm install
+
   - name: install mocha test env
     shell: 'sudo npm install'
 
