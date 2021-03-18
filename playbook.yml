@@ -28,7 +28,7 @@
     - name: set up npm and node.js lastest
       command: sudo apt-get install -y nodejs
 
-    - name: Remove all element
+    - name: remove all element
       ansible.builtin.shell: rm -rf Bot-Discord
       args:
         executable: /bin/bash
@@ -41,7 +41,7 @@
         update: yes
       register: git_finished
 
-    - name: Create file .env
+    - name: create file .env
       copy:
         dest: /home/{{ AZ_user }}/{{ app_name }}/.env
         content: |
