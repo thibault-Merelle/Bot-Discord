@@ -7,11 +7,11 @@ Dans le cadre de la formation MS CLOUD de l'école du numérique simplon.co, not
 
 ## Equipe de developpement
 
-Thibault: lien github
+Thibault: https://github.com/thibault-Merelle
 
-Mouny: lien github
+Mouny: https://github.com/keomouny
 
-joshua: lien github
+Joshua: https://github.com/jozuah
 
 ![simplon-logo](https://simplon.co/storage/2693/logo-simplon_23.png)
 
@@ -46,6 +46,8 @@ joshua: lien github
 
 ## Déploiement du bot
 
+### Via Ansible Playbook
+
 Etape 1 : Cloner le dépot pour avoir le fichier playbook.yml et le hosts
 via l'invité de commandes:
 
@@ -68,6 +70,13 @@ via l'invité de commandes :
 
 Etape 4 : Insérer la clé privée discord du bot.
 
+### Via Azure web service
+
+Pour mettre le bot en ligne : Aller sur le site 
+
+[marvin-discord-bot.azurewebsites.net](marvin-discord-bot.azurewebsites.net)
+
+
 ## Actions du bot
 
 Répondre à deux phrases
@@ -83,6 +92,8 @@ bonjour
 ## Monitoring 
 
 Une fois le bot en ligne, il est possible de suivre l'activité du bot depuis le fichier "Bot-Discord/logs/logs.txt" qui se trouve sur la vm
+
+Monitoring depuis le site portal.azure.com
 
 ## Evolution du bot
 
